@@ -45,7 +45,7 @@ export default function Editor({ onBack }: { onBack: () => void }) {
     setTimeout(() => document.getElementById('inspector-ai-input')?.focus(), 50);
   };
 
-  const handleSegmentAction = (action: 'comment' | 'history' | 'ask', id?: number) => {
+  const handleSegmentAction = (action: string, id?: number) => {
     if (id && !selectedSegmentIds.includes(id)) {
       setSelectedSegmentIds([id]);
       setPrimarySelectedId(id);
@@ -127,12 +127,13 @@ export default function Editor({ onBack }: { onBack: () => void }) {
               ))}
             </div>
             
-            {/* Selection Action Bar */}
-            <SelectionActionBar 
-              selectedCount={selectedSegmentIds.length} 
-              onAction={(action) => handleSegmentAction(action)} 
-            />
           </div>
+
+          {/* Selection Action Bar */}
+          <SelectionActionBar 
+            selectedCount={selectedSegmentIds.length} 
+            onAction={(action) => handleSegmentAction(action)} 
+          />
 
           {/* Bottom Panel */}
           {showBottomPanel && (
