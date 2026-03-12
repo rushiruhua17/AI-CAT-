@@ -31,7 +31,7 @@ export default function EditorHeader({ onBack }: EditorHeaderProps) {
 
         <div className="flex items-center gap-2 border-l border-slate-200 pl-4">
           <button className="flex items-center gap-1.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 shadow-sm px-3 py-1.5 rounded-md text-[13px] font-medium transition-colors">
-            <Sparkles className="w-3.5 h-3.5 text-ai-500" />
+            <Sparkles className="w-3.5 h-3.5 text-ai-600" />
             AI Auto-Translate
           </button>
           <button className="bg-primary-600 hover:bg-primary-700 text-white shadow-sm px-4 py-1.5 rounded-md text-[13px] font-medium transition-colors">

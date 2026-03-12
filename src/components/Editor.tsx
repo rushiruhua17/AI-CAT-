@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { Segment } from '../types';
 
 import EditorHeader from './EditorHeader';
@@ -8,7 +7,6 @@ import SegmentRow from './SegmentRow';
 import SelectionActionBar from './SelectionActionBar';
 import InspectorPane from './InspectorPane';
 import BottomUtilityPanel from './BottomUtilityPanel';
-import QuickAskOverlay from './QuickAskOverlay';
 
 const initialSegments: Segment[] = [
   { id: 1, source: 'Financial growth & strategy', target: '财务增长与战略', status: 'approved', origin: 'ai' },
@@ -38,17 +36,13 @@ export default function Editor({ onBack }: { onBack: () => void }) {
   const [showBottomPanel, setShowBottomPanel] = useState(false);
   const [compactRows, setCompactRows] = useState(false);
   const [showMetadata, setShowMetadata] = useState(true);
-  const [showQuickAsk, setShowQuickAsk] = useState(false);
 
   const selectedSegments = segments.filter(s => selectedSegmentIds.includes(s.id));
 
   const handleQuickAskClick = () => {
-    if (showInspector) {
-      setInspectorTab('assist');
-      setTimeout(() => document.getElementById('inspector-ai-input')?.focus(), 50);
-    } else {
-      setShowQuickAsk(!showQuickAsk);
-    }
+    setShowInspector(true);
+    setInspectorTab('assist');
+    setTimeout(() => document.getElementById('inspector-ai-input')?.focus(), 50);
   };
 
   const handleSegmentAction = (action: 'comment' | 'history' | 'ask', id?: number) => {
@@ -57,7 +51,6 @@ export default function Editor({ onBack }: { onBack: () => void }) {
       setPrimarySelectedId(id);
     }
     setShowInspector(true);
-    setShowQuickAsk(false);
     
     if (action === 'comment') {
       setInspectorTab('activity');
@@ -110,7 +103,6 @@ export default function Editor({ onBack }: { onBack: () => void }) {
         setCompactRows={setCompactRows}
         showMetadata={showMetadata}
         setShowMetadata={setShowMetadata}
-        showQuickAsk={showQuickAsk}
         onQuickAskClick={handleQuickAskClick}
       />
 
@@ -164,20 +156,6 @@ export default function Editor({ onBack }: { onBack: () => void }) {
             />
           </div>
         )}
-
-        {/* Floating Quick Ask */}
-        <AnimatePresence>
-          {showQuickAsk && (
-            <QuickAskOverlay 
-              selectedSegments={selectedSegments} 
-              onClose={() => setShowQuickAsk(false)} 
-              onOpenInPanel={() => {
-                setShowQuickAsk(false);
-                setShowInspector(true);
-              }}
-            />
-          )}
-        </AnimatePresence>
       </div>
     </div>
   );

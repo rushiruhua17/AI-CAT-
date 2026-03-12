@@ -10,7 +10,6 @@ interface EditorToolbarProps {
   setCompactRows: (v: boolean) => void;
   showMetadata: boolean;
   setShowMetadata: (v: boolean) => void;
-  showQuickAsk: boolean;
   onQuickAskClick: () => void;
 }
 
@@ -19,7 +18,7 @@ export default function EditorToolbar({
   showBottomPanel, setShowBottomPanel,
   compactRows, setCompactRows,
   showMetadata, setShowMetadata,
-  showQuickAsk, onQuickAskClick
+  onQuickAskClick
 }: EditorToolbarProps) {
   const [batchOpen, setBatchOpen] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
@@ -137,9 +136,9 @@ export default function EditorToolbar({
       <div className="flex items-center gap-2">
         <button 
           onClick={onQuickAskClick}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[13px] font-medium transition-colors border shadow-sm ${showQuickAsk ? 'bg-primary-50 text-primary-700 border-primary-300' : 'bg-white text-slate-800 border-slate-300 hover:bg-slate-50'}`}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[13px] font-medium transition-colors border shadow-sm bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
         >
-          <Zap className={`w-3.5 h-3.5 ${showQuickAsk ? 'text-ai-600' : 'text-slate-500'}`} />
+          <Zap className="w-3.5 h-3.5 text-ai-600" />
           Quick Ask
         </button>
         <button 
